@@ -24,6 +24,7 @@ chokidar
         handleAddDir(path);
       }
     } else if (event === 'change') {
+      // @TODO add event === 'add' here?
       handleChange(path);
     }
   });
