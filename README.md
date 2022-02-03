@@ -27,7 +27,7 @@ Old **files** or **directories** don't get deleted from the FTP server when you 
 
 ## Install
 
-`npm install -g sffs` (@TODO publish)
+`npm install -g opensoars_sffs`
 
 ## Use
 
