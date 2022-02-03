@@ -26,6 +26,10 @@ chokidar
     } else if (event === 'change') {
       // @TODO add event === 'add' here?
       handleChange(path);
+    } else if (event === 'unlink') {
+      handleUnlink(path);
+    } else if (event === 'unlinkDir') {
+      handleUnlinkDir(path);
     }
   });
 
@@ -105,6 +109,79 @@ function handleChange(path) {
       console.log('^ fullfilled:', path);
     } else {
       console.log('^ rejected:', path);
+    }
+  });
+}
+
+function handleUnlink(path) {
+  console.log('-', path);
+
+  // @TODO have one function for the lftp spawn
+  const lftpArgs = [
+    DEBUG ? '-d' : '',
+    '-e',
+    // @TODO get (extend?) from .sffs
+    `set net:max-retries 10; set net:timeout 5;` +
+      `set net:reconnect-interval-multiplier 1;` +
+      `set net:reconnect-interval-base 5;` +
+      `cd ${REMOTE_DIR};` +
+      `rm ${path};` +
+      `&& exit`,
+    SFTP_URL
+  ];
+
+  const lftp = spawn('lftp', lftpArgs);
+
+  lftp.stdout.on('data', data => {
+    if (DEBUG) console.log(`+ - stdout: ${data}`);
+  });
+
+  lftp.stderr.on('data', data => {
+    if (DEBUG) console.error(`+ - stderr: ${data}`);
+  });
+
+  lftp.on('close', code => {
+    if (code === 0) {
+      console.log('+ fullfilled:', path);
+    } else {
+      console.log('+ rejected:', path);
+    }
+  });
+}
+
+// @TODO implement a queue, so only required lftp commands are run
+function handleUnlinkDir(path) {
+  console.log('-', path);
+
+  // @TODO have one function for the lftp spawn
+  const lftpArgs = [
+    DEBUG ? '-d' : '',
+    '-e',
+    // @TODO get (extend?) from .sffs
+    `set net:max-retries 10; set net:timeout 5;` +
+      `set net:reconnect-interval-multiplier 1;` +
+      `set net:reconnect-interval-base 5;` +
+      `cd ${REMOTE_DIR};` +
+      `rm -r ${path};` +
+      `&& exit`,
+    SFTP_URL
+  ];
+
+  const lftp = spawn('lftp', lftpArgs);
+
+  lftp.stdout.on('data', data => {
+    if (DEBUG) console.log(`+ - stdout: ${data}`);
+  });
+
+  lftp.stderr.on('data', data => {
+    if (DEBUG) console.error(`+ - stderr: ${data}`);
+  });
+
+  lftp.on('close', code => {
+    if (code === 0) {
+      console.log('+ fullfilled:', path);
+    } else {
+      console.log('+ rejected:', path);
     }
   });
 }
