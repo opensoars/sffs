@@ -8,7 +8,7 @@ Simple command line tool to help with remote FTP server "save and deploy".
 
 ## Why?
 
-Because many existing tools are inconsistent with regards to their performance. They randomly drop SFTP connections, they can't create directories, they can't recursively parent directories, they can't upload on file change, etc etc.
+Because many existing tools are inconsistent with regards to their performance. They randomly drop SFTP connections, they can't create directories, they can't recursively create parent directories, they can't upload on file change, etc etc.
 
 Sometimes me and the people I work with want to simply just work on a (simple and cheaply hosted) production enviroment straight from our local machine. (Oh no so dangerous oh no bla bla... Why don't you have \*insert one billion devops/ci/etc tools here\* set up for your project??! If you are like this, please realize that **ffs** is actually in the name of this project.)
 
