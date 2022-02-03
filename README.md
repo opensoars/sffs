@@ -18,7 +18,7 @@ When `sffs` gets started it tries to recursively mirror all **directories** in t
 
 When a **file** or **directory name** change gets detected it will upload that **file** or **directory** to the FTP server.
 
-Old **files** or **directories** don't get deleted from the FTP server when you rename them. (@TODO decide whether this is something to do)
+~~Old **files** or **directories** don't get deleted from the FTP server when you rename them. (@TODO decide whether this is something to do)~~
 
 ## Dependencies
 
