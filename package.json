@@ -1,6 +1,6 @@
 {
-  "name": "sffs",
-  "version": "0.0.1",
+  "name": "opensoars_sffs",
+  "version": "0.0.2",
   "description": "Save File FTP Sync",
   "main": "bin/index.js",
   "bin": {
@@ -9,7 +9,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "save",
+    "file",
+    "directory",
+    "watch",
+    "lftp",
+    "sftp",
+    "ftp",
+    "sync",
+    "synchronize"
+  ],
   "author": "opensoars",
   "license": "MIT",
   "dependencies": {
