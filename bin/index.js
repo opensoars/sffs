@@ -8,10 +8,15 @@ const { spawn } = require('child_process');
 const chokidar = require('chokidar');
 const dotenv = require('dotenv');
 
-const { CLIENT_NAME, SFTP_URL, DEBUG: _DEBUG, REMOTE_DIR } = dotenv.parse(
-  fs.readFileSync(`${process.cwd()}/.sffs`).toString()
-);
+const {
+  CLIENT_NAME,
+  SFTP_URL,
+  DEBUG: _DEBUG,
+  REMOTE_DIR,
+  SYNC_FILE_ADD: _SYNC_FILE_ADD
+} = dotenv.parse(fs.readFileSync(`${process.cwd()}/.sffs`).toString());
 const DEBUG = _DEBUG === 'true';
+const SYNC_FILE_ADD = _SYNC_FILE_ADD === 'true';
 
 if (CLIENT_NAME) console.log('\nclient:', CLIENT_NAME, '\n');
 
@@ -81,5 +86,7 @@ chokidar
     ignored: ['node_modules', /(^|[\/\\])\../]
   })
   .on('all', (event, path) => {
-    if (handlers[event]) handlers[event](path);
+    if (SYNC_FILE_ADD && event === 'add') {
+      handlers['change'](path);
+    } else if (handlers[event]) handlers[event](path);
   });

@@ -1,6 +1,6 @@
 {
   "name": "opensoars_sffs",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Save File FTP Sync",
   "main": "bin/index.js",
   "bin": {
