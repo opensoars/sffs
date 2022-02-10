@@ -10,3 +10,5 @@ DEBUG=false
 CLIENT_NAME=ffs.com
 
 SYNC_FILE_ADD=false
+
+IGNORE=.somefile,somedirectory,splitByComma
