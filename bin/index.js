@@ -13,7 +13,8 @@ const {
   SFTP_URL,
   DEBUG: _DEBUG,
   REMOTE_DIR,
-  SYNC_FILE_ADD: _SYNC_FILE_ADD
+  SYNC_FILE_ADD: _SYNC_FILE_ADD,
+  IGNORE
 } = dotenv.parse(fs.readFileSync(`${process.cwd()}/.sffs`).toString());
 const DEBUG = _DEBUG === 'true';
 const SYNC_FILE_ADD = _SYNC_FILE_ADD === 'true';
@@ -82,8 +83,12 @@ const handlers = {
  */
 chokidar
   .watch('.', {
-    // @TODO get (extend?) this from .sffs
-    ignored: ['node_modules', /(^|[\/\\])\../]
+    // @TODO don't include node_modules & dot files by default?
+    ignored: [
+      'node_modules',
+      /(^|[\/\\])\../,
+      ...(IGNORE ? IGNORE.split(',') : [])
+    ]
   })
   .on('all', (event, path) => {
     if (SYNC_FILE_ADD && event === 'add') {
