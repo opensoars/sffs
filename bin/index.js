@@ -14,7 +14,8 @@ const {
   DEBUG: _DEBUG,
   REMOTE_DIR,
   SYNC_FILE_ADD: _SYNC_FILE_ADD,
-  IGNORE
+  IGNORE,
+  MAX_RETRIES = 5
 } = dotenv.parse(fs.readFileSync(`${process.cwd()}/.sffs`).toString());
 const DEBUG = _DEBUG === 'true';
 const SYNC_FILE_ADD = _SYNC_FILE_ADD === 'true';
@@ -28,7 +29,7 @@ function spawnLftp(commands, path, logPrefix) {
     DEBUG ? '-d' : '',
     '-e',
     // @TODO get (extend?) from .sffs
-    `set net:max-retries 10; set net:timeout 5;` +
+    `set net:max-retries ${MAX_RETRIES}; set net:timeout 5;` +
       `set net:reconnect-interval-multiplier 1;` +
       `set net:reconnect-interval-base 5;` +
       commands +

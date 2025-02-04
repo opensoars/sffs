@@ -12,3 +12,5 @@ CLIENT_NAME=ffs.com
 SYNC_FILE_ADD=false
 
 IGNORE=.somefile,somedirectory,splitByComma
+
+MAX_RETRIES=3
