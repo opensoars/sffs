@@ -87,7 +87,9 @@ chokidar
     // @TODO don't include node_modules & dot files by default?
     ignored: [
       'node_modules',
-      /(^|[\/\\])\../,
+      // /(^|[\/\\])\../, // dot files
+      '.sffs',
+      '.env',
       ...(IGNORE ? IGNORE.split(',') : [])
     ]
   })
