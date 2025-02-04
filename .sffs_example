@@ -1,7 +1,7 @@
 SFTP_URL=sftp://<USERNAME>:<PASSWORD>@<HOST>
 
 # Base path of the remote server
-REMOTE_DIR=/www
+REMOTE_DIR=./www
 
 # Set to true for (a lot of) debug logging
 DEBUG=false
