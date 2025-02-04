@@ -15,7 +15,7 @@ const {
   REMOTE_DIR,
   SYNC_FILE_ADD: _SYNC_FILE_ADD,
   IGNORE,
-  MAX_RETRIES = 5
+  MAX_RETRIES = 10
 } = dotenv.parse(fs.readFileSync(`${process.cwd()}/.sffs`).toString());
 const DEBUG = _DEBUG === 'true';
 const SYNC_FILE_ADD = _SYNC_FILE_ADD === 'true';
